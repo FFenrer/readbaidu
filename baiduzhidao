@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+import re
+import urllib2
+file=open("1.txt","r").readline()
+res = open("res.txt","w")
+for urls in file:
+	print urls
+	response = urllib2.urlopen(urls).read()
+	title = re.findall('<span class="ask-title  ">(*.?)</span>',response)
+	content = re.findall('<pre id="best-content-[0-9]+" accuse="aContent" class="best-text mb-10">)(.*?)</pre>',response)
+	res.write(title,"\n",content,"\n\n")
+	
+file.close
+res.close
+
+
+# response = urllib2.urlopen('http://music.jd.com/60059228.html').read()
+# songs = re.findall('<td class="player-name" skuid="[0-9]+" s_name="([^"]+)" s_url="[^"]+" src="([^"]+)">',response)
+# for song in songs:
+    # print song[0],song[1]
+
